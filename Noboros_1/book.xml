@@ -1,0 +1,194 @@
+<book id="Noboros_1" title="Kabenogura break down" series="Ciclo di Noboros" image="Noboros.svg" startPage="start" jumpPage="battle" characterPage="character">
+	<page id="character" title="Gestione del personaggio">
+		<text>Abilità:</text>
+		<text require="#parkor">Parkour: {#parkor}</text>
+		<text require="#hacking">Hacking: {#hacking}</text>
+		<text require="#stealing">Furto: {#stealing}</text>
+		<text require="#fight">Lotta: {#stealing}</text>
+		<action page="{§PreviousPage}">Continua</action>
+	</page>
+	<page id="battle">
+		<text image="battle.png">Nemico: {enemyName}</text>
+		<text>Energia: {enemyHP}</text>
+		<text>Petenza: {enemyPower}</text>
+		<action require="" modify="-enemyHP(1)">Colpisci</action>
+		<action require="#fight({enemyPower})" modify="-enemyHP(2)">Colpisci forte</action>
+		<action require="#fight({enemyPower}) enemyHP(1) @Pistola" modify="-@Proiettile =enemyHP(0)">Spara</action>
+		<action page="{§PreviousPage}" require="=enemyHP(0) #fight({enemyPower})"
+modify="{enemyId}">Continua</action>
+		<action page="{§PreviousPage}" require="=enemyHP(0) !#fight({enemyPower})"
+modify="{enemyId} #fight">Continua</action>
+	</page>
+	<page id="start" title="Prologo">
+		<text>Noboros è una megalopoli stratificata da anni di edilizia selvaggia, le multinazionali hanno costruito le loro sedi da centinaia di piani sopra il substrato urbanistico preesistente, per poi abbandonarne progressivamente i piani inferiori costruendo nuovi viadotti sopraelevati.</text>
+		<text>Creando così l'Uppercity, un dedalo di quartieri di lusso presidiati dalle milizie aziendali.
+Solo i pendolari con regolare permesso di transito possono utilizzare gli elevatori per accedervi, il resto della popolazione rimane relegata nei bassifondi vivendo in quella penombra artificiale fatta di luci a bassa intensità e vicoli umidi.</text>
+		<action page="SenjimaHotel_1">Continua</action>
+	</page>
+	<page id="SenjimaHotel_1" title="Senjima Capsule Hotel" modify="$cardKabenogura @money(20)">
+		<text>Nel buio del cubicolo vieni svegliato dal suono stridulo della sveglia a modulazione, ne esci a carponi per ritrovarti nel corridoio del Senjima Capsule Hotel.
+Un posto economico ma ben tenuto popolato principalmente da pendolari come te, ormai sono cinque mesi che ti sei trasferito in questo quartiere, una settimana dopo aver superato le selezioni della Kabenogura.</text>
+		<text>Noti che il portello della capsula in fondo al corridio è socchiuso.</text>
+		<action page="SenjimaHotel_1a">Dai un'occhiata al portello</action>
+		<action page="SenjimaHotel_2">Vai verso l'uscita</action>
+	</page>
+	<page id="SenjimaHotel_1a" title="Senjima Capsule Hotel">
+		<text>Ti avvicini al portello della capsula, il suo occupante è steso sul materasso di lattice, probabilmente sta dormendo, noti che il suo portafogli è posato contro la parete non lontano dall'apertura.</text>
+		<action page="SenjimaHotel_1b" modify="#stealing">Rubi il portafogli</action>
+		<action page="SenjimaHotel_2">Vai verso l'uscita</action>
+	</page>
+	<page id="SenjimaHotel_1b" title="Senjima Capsule Hotel">
+		<text>Afferri con delicatezza il portafogli e accosti il portello, poi torni verso la tua capsula per esaminarne il contenuto.</text>
+		<text>Si tratta di un impiegato della Tyrell Corporation, probabilmente in città per il congresso di biogenetica.</text>
+		<modify modify="$cardTyrellCorporation" require="!$cardTyrellCorporation">Tesserino della Tyrell Corporation</modify>
+		<modify modify="@money(50) SenjimaHotel_1b_money" require="!SenjimaHotel_1b_money">50 crediti</modify>
+		<action page="SenjimaHotel_2">Vai verso l'uscita</action>
+	</page>
+	<page id="SenjimaHotel_2" title="Senjima Capsule Hotel">
+		<text>Mentre ti incammini verso l'uscita un leggero scrosciare ti informa che stanno lavando le strade della Uppercity. L'acqua cola attraverso le fessure e le grate cocciolando come fosse pioggia.</text>
+		<text>Appoggi la tessera dell'alloggio sul bancone e la signora Wang ti fa un leggero segno di saluto con il capo.</text>
+		<action page="LowerCity_1">Esci in strada</action>
+	</page>
+	<page id="LowerCity_1" title="Lower City">
+		<text>La strada è affollata da impiegati incravattati che shamano a destra verso gli elevatori.</text>
+		<text>Fra un'ora inizia il tuo turno di lavoro nella sezione informatica della Kabenogura. Puoi mangiare un boccone prima di prendere l'elevatore, sperando di evitare l'ora di punta oppure puoi metterti in fila ed aspetare che la coda si smaltisca.</text>
+		<action page="LowerCity_2a">Vai a sinistra verso il Nissin Ramen</action>
+		<action page="LowerCity_2b">Vai a destra seguendo il flusso fino alla Pizzeria da Gennaro</action>
+	</page>
+	<page id="LowerCity_2a" title="Lower City">
+		<text>Procedi a fatica controcorrente passando sul bordo esterno della strada per evitare il fiume di pendolari.</text>
+		<text>Passando vicino ad un vicolo semi ostruito da un cassonetto senti un uomo che ti chiama:</text>
+		<quote>Ehi amico! Vieni! Ho roba interessante.</quote>
+		<action page="LowerCity_3">Procedi verso il Nissin Ramen</action>
+		<action page="LowerCity_4">Entri nel vicolo</action>
+	</page>
+	<page id="LowerCity_4" title="Lower City">
+		<text>Superi il casonetto e ti trovi davanti un tipo losco appoggiato al muro, ti scruta attentamente poi dice:</text>
+		<quote>Ho tutto quello che ti serve per un viaggio di sola andata per il paradiso, dimmi che biglietto vuoi... </quote>
+		<text>Crediti: {@money}</text>
+		<modify modify="@Snaff LowerCity_4_buy -@money(5)" require="!@Snaff">Snaff (5 crediti)</modify>
+		<modify modify="@Codeina-60 LowerCity_4_buy -@money(10)" require="!@Codeina-60">Codeina-60 (10 crediti)</modify>
+		<modify modify="@Polygaina LowerCity_4_buy -@money(30)" require="!@Polygaina">Polygaina (30 crediti)</modify>
+		<action page="LowerCity_3" require="LowerCity_4_buy">Torni sulla strada principale e procedi verso il Nissin Ramen</action>
+		<action page="LowerCity_4a" require="!LowerCity_4_buy">Torni sulla strada principale e procedi verso il Nissin Ramen</action>
+	</page>
+	<page id="LowerCity_4a" title="Lower City">
+		<text>Il pusher ti blocca nel vicolo.</text>
+		<quote>Dove credi di andare!</quote>
+		<text require="LowerCity_4a_pusher">Spacciatore (svenuto)</text>
+		<text require="LowerCity_4a_pusher_loot">Lo spacciatore aveva qualche oggetto utile...</text>
+		<jump modify="=enemyHP(4) =enemyPower(1) =enemyName(Spacciatore) =enemyId(LowerCity_4a_pusher)" require="!LowerCity_4a_pusher">Spacciatore</jump>
+		<modify modify="@money(20) LowerCity_4a_pusher_money" require="LowerCity_4a_pusher_loot !LowerCity_4a_pusher_money">20 nuovi crediti</modify>
+		<modify modify="@Pistola" require="LowerCity_4a_pusher_loot !@Pistola">Pistola</modify>
+		<modify modify="@Proiettile(10) LowerCity_4a_pusher_Proiettile" require="LowerCity_4a_pusher_loot !LowerCity_4a_pusher_Proiettile">10 proiettili per pistola</modify>
+		<modify modify="@Snaff LowerCity_4_buy" require="LowerCity_4a_pusher_loot !@Snaff">Snaff</modify>
+		<modify modify="@Codeina-60 LowerCity_4_buy" require="LowerCity_4a_pusher_loot !@Codeina-60">Codeina-60</modify>
+		<modify modify="@Polygaina LowerCity_4_buy" require="LowerCity_4a_pusher_loot !@Polygaina">Polygaina</modify>
+		<action modify="LowerCity_4a_pusher_loot" require="!LowerCity_4a_pusher_loot LowerCity_4a_pusher">Perquisisci lo spacciatore</action>
+		<action page="LowerCity_3" require="LowerCity_4a_pusher_loot">Continua</action>
+	</page>
+	<page id="LowerCity_3" title="Nissin Ramen">
+		<text>Il flusso di impiegati sta calando mentre ti infili sotto la tenda logora del Nissin Ramen. Un chiosco fumoso dove un cuoco cinese sta preparando spagetti e zuppa.</text>
+		<text require="!LowerCity_x_eat">Ti accomodi su uno sgabello e ordini da mangiare:</text>
+		<text require="LowerCity_x_eat">Mangi con gusto, bevi un bicchiere di the verde e torni in strada.</text>
+		<text require="!LowerCity_x_eat">Crediti: {@money}</text>
+		<modify modify="LowerCity_x_eat -@money(4)" require="!LowerCity_x_eat">Soba (4 crediti)</modify>
+		<modify modify="LowerCity_x_eat -@money(6)" require="!LowerCity_x_eat">Ramen (6 crediti)</modify>
+		<action page="LowerCity_5" require="LowerCity_x_eat">Continua</action>
+	</page>
+	<page id="LowerCity_5" title="Lower City">
+		<text>La strada si è svuotata e ora cammini speditamente.</text>
+		<action page="LowerCity_6">Prosegui fino agli elevatori</action>
+	</page>
+	<page id="LowerCity_2b" title="Lower City">
+		<text>Vieni trasportato dalla folla e in pochi minuti ti ritrovi davanti alla pizzeria.</text>
+		<action page="LowerCity_7">Entra nella pizzeria</action>
+		<action page="LowerCity_6">Continua verso gli elevatori</action>
+	</page>
+	<page id="LowerCity_7" title="Pizzeria da Gennaro">
+		<text>La pizzeria non è altro che un bancone di vetro, un forno elettrico e un paio di tavoli malfermi.</text>
+		<text require="!LowerCity_x_eat">Ti avvicini al bancone dove sono in bella mostra alcune pizze tagliate a spicchi.</text>
+		<text require="LowerCity_x_eat">Prendi una pizza paghi e ti siedi; Mangi avidamente e rinvigorito esci.</text>
+		<text require="!LowerCity_x_eat">Crediti: {@money}</text>
+		<modify modify="LowerCity_x_eat -@money(3)" require="!LowerCity_x_eat">Trancio di Margerita (3 crediti)</modify>
+		<modify modify="LowerCity_x_eat -@money(5)" require="!LowerCity_x_eat">Trancio di Tonno e Cipolla (5 crediti)</modify>
+		<action page="LowerCity_6" require="LowerCity_x_eat">Ti dirigi agli elevatori</action>
+	</page>
+	<page id="LowerCity_6" title="Elevatore 52">
+		<text>L'elevatore non è altro che un ascensore che permette di accedere alla Upper City, per motivi di sicurezza e per mantenere il giardinetto dei ricchi pulito e gradevole, l'accesso è riservato ai pendolari muniti di tesserino valido.</text>
+		<group require="!lostCard">
+			<text require="LowerCity_x_eat">Il tuo spuntino ti ha evitato l'ora di punta, ti avvicini alla cabina senza perdere altro tempo.</text>
+			<text require="!LowerCity_x_eat">Una fila interminabile di impiegati avanzano lentamente in attesa di accedere alla cabina. Dopo più di mezzora finalmente arriva il tuo turno.</text>
+		</group>
+		<text require="lostCard">Se hai un'altra carta puoi provare a salire nuovamente.</text>
+		<text>Devi passare la tessera magnetica nel lettore.</text>
+		<action page="UpperCity_0" require="$cardKabenogura">Usa la tua tessera della Kabenogura</action>
+		<action page="UpperCity_0" require="$cardTyrellCorporation">Usa la tessera della Tyrell Corporation</action>
+	</page>
+	<page id="UpperCity_0" title="Elevatore 52">
+		<text>Entri nella cabina insieme ad una donna che ripiega in fretta l'ombrello e controlla l'orario in un piccolo LCD innestato sotto la pelle del polso.</text>
+		<text>Le porte si chiudono e la cabina sale velocemente con una leggera vibrazione.</text>
+		<test>Pochi seconti e le porte si riaprono, la luce del sole ti abbaglia mentre due quardie della Elevator Security Force pequisiscono la donna.</test>
+		<group require="LowerCity_4_buy">
+			<text modify="=temp(0)">Se ti trovano addosso la droga rischi di perdere l'autorizzazione al transito.</text>
+			<text require="@Snaff">Il sacchetto di Snaff è troppo volumnoso, devi liberantene assolutamente prima di uscire dalla cabina.</text>
+			<text require="@Codeina-60 !Codeina_hide !Codeina_hide2" modify="temp">Il barattolo di compresse di Codeina potrebbe sfuggire al controllo.</text>
+			<text require="@Polygaina !Polygaina_hide" modify="temp">I dermi di Polygaina possono essere occultati facilmente.</text>
+			<text require="@Codeina-60 Codeina_hide">Hai nascosto il barattolo di compresse di Codeina.</text>
+			<text require="@Codeina-60 Codeina_hide2">Hai cercato di nascondere il barattolo di compresse di Codeina.</text>
+			<text require="@Polygaina Polygaina_hide">I dermi di Polygaina sono occultati nella tua scarpa destra.</text>
+			<action require="@Snaff" modify="-@Snaff -temp">Butti lo Snaff nel piccolo cestino a fianco della porta.</action>
+			<action require="@Codeina-60 !Codeina_hide !Codeina_hide2" modify="-@Codeina-60 -temp">Fai cadere il barattolo di compresse nella grata di scolo</action>
+			<action require="@Codeina-60 !Codeina_hide !Codeina_hide2" modify="#stealing Codeina_hide2 -temp">Cerchi di nascondere la Codeina</action>
+			<action require="@Codeina-60 !Codeina_hide !Codeina_hide2 #stealing(2)" modify="#stealing Codeina_hide -temp">Cerchi di nascondere la Codeina</action>
+			<action require="@Polygaina !Polygaina_hide" modify="-@Polygaina Polygaina_inElevator52 -temp">Infili il foglio di dermi dietro il cartello informativo all'interno della cabina</action>
+			<action require="@Polygaina !Polygaina_hide #stealing" modify="Polygaina_hide -temp">Nascondi i dermi di Polygaina nella scarpa destra</action>
+		</group>
+		<action page="UpperCity_1a" require="!temp">Esci dalla cabina e ti fai perquisire</action>
+		<action page="UpperCity_1b" require="temp">Tenti di fuggire spintonando le guardie</action>
+	</page>
+	<page id="UpperCity_1a" title="Elevatore 52">
+		<text modify="=drug(0)">Le due guardie si avvicinano e cominciano la perquisizione.</text>
+		<text require="Polygaina_hide">Le guardie non hanno trovato i dermi che hai nascosto.</text>
+		<text require="@Codeina-60 Codeina_hide">Per un attimo hai temuto il peggio quando una guardia ha passato la mano vicino alla fodera della giacca dove avevi nascosto la Codeina.</text>
+		<group require="@Codeina-60 !Codeina_hide">
+			<text modify="drug">Una guardia trova il barattolo di compresse di Codeina, e ti guarda con dispezzo.</text>
+			<quote>Il suo permesso è revocato per violazione dell'articolo 74 della legge sul transito.</quote>
+			<quote>Mi consegni immediatamente il suo tesserino e risalga sull'elevatore.</quote>
+			<action page="UpperCity_1c" modify="=@Codeina-60(0) =Codeina_hide(0)">Consegni la tessera magnetica</action>
+			<action page="UpperCity_1b" modify="=@Codeina-60(0) =Codeina_hide(0)">Tenti di fuggire spintonando le guardie</action>
+		</group>
+		<action page="UpperCity_3" require="!drug">Continua</action>
+	</page>
+	<page id="UpperCity_1b" title="Elevatore 52">
+		<text>Esci con un balzo atterrando una guardia, mentre l'altra colta di sorpresa cerca di estrae la pistola. La donna urla e scappa in preda al panico.</text>
+		<action page="UpperCity_2a" >Aggredisci la guardia prima che possa estrarre l'arma</action>
+		<action page="UpperCity_2b" require="@Pistola" modify="-@Proiettile kill">Spari alla guardia</action>
+		<action page="UpperCity_2b" require="#parkor" modify="#parkor">Cerchi di fuggire saltando dal parapetto</action>
+	</page>
+	<page id="UpperCity_1c" title="Elevatore 52">
+		<text>Devi consegnare la tessera magnetica e tornare nella Lower City.</text>
+		<action require="$cardKabenogura !lostCard" modify="-$cardKabenogura lostCard">Consegni la tua tessera della Kabenogura</action>
+		<action require="$cardTyrellCorporation !lostCard" modify="-$cardTyrellCorporation lostCard">Consegni la tessera della Tyrell Corporation</action>
+		<action page="LowerCity_6" require="lostCard">Ritorni nella Lower City</action>
+	</page>
+	<page id="UpperCity_2a" title="Upper City">
+		<text require="!UpperCity_2a_guard">La guardia ti affronta a mani nude.</text>
+		<text>Guardia ESF (incoscente)</text>
+		<text require="UpperCity_2a_guard">Guardia ESF (incoscente)</text>
+		<text require="UpperCity_2a_guard">Ti dilegui fra i cespugli del parco adiacente.</text>
+		<jump require="!UpperCity_2a_guard" modify="=enemyHP(8) =enemyPower(1) =enemyName(Guardia ESF) =enemyId(UpperCity_2a_guard)">Guardia ESF</jump>
+		<action page="UpperCity_3" require="UpperCity_2a_guard">Fuggi</action>
+	</page>
+	<page id="UpperCity_2b" title="Upper City">
+		<text require="kill">Colpisci la guardia, che cade a terra esanime.</text>
+		<text>Ti dilegui fra i cespugli del parco adiacente.</text>
+		<action page="UpperCity_3">Fuggi</action>
+	</page>
+	<page id="UpperCity_3" title="Upper City">
+		<!-- sei libero di proseguire -->
+		<jump page="character">Statistiche del personaggio</jump>
+	</page>
+</book>
+
+
