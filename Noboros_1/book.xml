@@ -1,11 +1,19 @@
-<book id="Noboros_1" title="Kabenogura break down" series="Ciclo di Noboros" image="Noboros.svg" startPage="start" jumpPage="battle" characterPage="character">
+<book id="Noboros_1" title="Kabenogura break down" series="Ciclo di Noboros" image="Noboros.svg" startPage="start" jumpPage="battle">
+	<menu>
+		<button page="character" image="character.svg">Scheda del personaggio</button>
+		<button page="map" image="map.svg">Mappa</button>
+	</menu>
+	<page id="map" title="Mappa">
+		<text>Questa è la mappa</text>
+		<back>Continua</back>
+	</page>
 	<page id="character" title="Gestione del personaggio">
 		<text>Abilità:</text>
 		<text require="#parkor">Parkour: {#parkor}</text>
 		<text require="#hacking">Hacking: {#hacking}</text>
 		<text require="#stealing">Furto: {#stealing}</text>
 		<text require="#fight">Lotta: {#stealing}</text>
-		<action page="{§PreviousPage}">Continua</action>
+		<back>Continua</back>
 	</page>
 	<page id="battle">
 		<text image="battle.png">Nemico: {enemyName}</text>
@@ -14,10 +22,10 @@
 		<action require="" modify="-enemyHP(1)">Colpisci</action>
 		<action require="#fight({enemyPower})" modify="-enemyHP(2)">Colpisci forte</action>
 		<action require="#fight({enemyPower}) enemyHP(1) @Pistola" modify="-@Proiettile =enemyHP(0)">Spara</action>
-		<action page="{§PreviousPage}" require="=enemyHP(0) #fight({enemyPower})"
-modify="{enemyId}">Continua</action>
-		<action page="{§PreviousPage}" require="=enemyHP(0) !#fight({enemyPower})"
-modify="{enemyId} #fight">Continua</action>
+		<back require="=enemyHP(0) #fight({enemyPower})"
+modify="{enemyId}">Continua</back>
+		<back require="=enemyHP(0) !#fight({enemyPower})"
+modify="{enemyId} #fight">Continua</back>
 	</page>
 	<page id="start" title="Prologo">
 		<text>Noboros è una megalopoli stratificata da anni di edilizia selvaggia, le multinazionali hanno costruito le loro sedi da centinaia di piani sopra il substrato urbanistico preesistente, per poi abbandonarne progressivamente i piani inferiori costruendo nuovi viadotti sopraelevati.</text>
