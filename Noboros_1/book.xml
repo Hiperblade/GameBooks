@@ -27,7 +27,13 @@ modify="{enemyId}">Continua</back>
 		<back require="=enemyHP(0) !#fight({enemyPower})"
 modify="{enemyId} #fight">Continua</back>
 	</page>
-	<page id="start" title="Prologo">
+    <page id="start" title="Kabenogura break down">
+        <text>Un'avventura cyberpunk nella megalopoli di Noboros fra spacciatori, hacker e multinazionali senza scrupoli.</text>
+        <text image="separatore.svg">Scritta da: Hiperblade nel: 2013</text>
+        <text>https://github.com/Hiperblade/GameBooks</text>
+        <action page="Prologo_1">Continua</action>
+    </page>
+	<page id="Prologo_1" title="Prologo">
 		<text>Noboros è una megalopoli stratificata da anni di edilizia selvaggia, le multinazionali hanno costruito le loro sedi da centinaia di piani sopra il substrato urbanistico preesistente, per poi abbandonarne progressivamente i piani inferiori costruendo nuovi viadotti sopraelevati.</text>
 		<text>Creando così l'Uppercity, un dedalo di quartieri di lusso presidiati dalle milizie aziendali.
 Solo i pendolari con regolare permesso di transito possono utilizzare gli elevatori per accedervi, il resto della popolazione rimane relegata nei bassifondi vivendo in quella penombra artificiale fatta di luci a bassa intensità e vicoli umidi.</text>
@@ -42,7 +48,7 @@ Un posto economico ma ben tenuto popolato principalmente da pendolari come te, o
 	</page>
 	<page id="SenjimaHotel_1a" title="Senjima Capsule Hotel">
 		<text>Ti avvicini al portello della capsula, il suo occupante è steso sul materasso di lattice, probabilmente sta dormendo, noti che il suo portafogli è posato contro la parete non lontano dall'apertura.</text>
-		<action page="SenjimaHotel_1b" modify="#stealing">Rubi il portafogli</action>
+		<action page="SenjimaHotel_1b" modify="#stealing">Ruba il portafogli</action>
 		<action page="SenjimaHotel_2">Vai verso l'uscita</action>
 	</page>
 	<page id="SenjimaHotel_1b" title="Senjima Capsule Hotel">
@@ -68,7 +74,7 @@ Un posto economico ma ben tenuto popolato principalmente da pendolari come te, o
 		<text>Passando vicino ad un vicolo semi ostruito da un cassonetto senti un uomo che ti chiama:</text>
 		<quote>Ehi amico! Vieni! Ho roba interessante.</quote>
 		<action page="LowerCity_3">Procedi verso il Nissin Ramen</action>
-		<action page="LowerCity_4">Entri nel vicolo</action>
+		<action page="LowerCity_4">Entra nel vicolo</action>
 	</page>
 	<page id="LowerCity_4" title="Lower City">
 		<text>Superi il casonetto e ti trovi davanti un tipo losco appoggiato al muro, ti scruta attentamente poi dice:</text>
@@ -77,8 +83,8 @@ Un posto economico ma ben tenuto popolato principalmente da pendolari come te, o
 		<modify modify="@Snaff LowerCity_4_buy -@money(5)" require="!@Snaff">Snaff (5 crediti)</modify>
 		<modify modify="@Codeina-60 LowerCity_4_buy -@money(10)" require="!@Codeina-60">Codeina-60 (10 crediti)</modify>
 		<modify modify="@Polygaina LowerCity_4_buy -@money(30)" require="!@Polygaina">Polygaina (30 crediti)</modify>
-		<action page="LowerCity_3" require="LowerCity_4_buy">Torni sulla strada principale e procedi verso il Nissin Ramen</action>
-		<action page="LowerCity_4a" require="!LowerCity_4_buy">Torni sulla strada principale e procedi verso il Nissin Ramen</action>
+		<action page="LowerCity_3" require="LowerCity_4_buy">Torna sulla strada principale e procedi verso il Nissin Ramen</action>
+		<action page="LowerCity_4a" require="!LowerCity_4_buy">Torna sulla strada principale e procedi verso il Nissin Ramen</action>
 	</page>
 	<page id="LowerCity_4a" title="Lower City">
 		<text>Il pusher ti blocca nel vicolo.</text>
@@ -120,7 +126,7 @@ Un posto economico ma ben tenuto popolato principalmente da pendolari come te, o
 		<text require="!LowerCity_x_eat">Crediti: {@money}</text>
 		<modify modify="LowerCity_x_eat -@money(3)" require="!LowerCity_x_eat">Trancio di Margerita (3 crediti)</modify>
 		<modify modify="LowerCity_x_eat -@money(5)" require="!LowerCity_x_eat">Trancio di Tonno e Cipolla (5 crediti)</modify>
-		<action page="LowerCity_6" require="LowerCity_x_eat">Ti dirigi agli elevatori</action>
+		<action page="LowerCity_6" require="LowerCity_x_eat">Dirigiti agli elevatori</action>
 	</page>
 	<page id="LowerCity_6" title="Elevatore 52">
 		<text>L'elevatore non è altro che un ascensore che permette di accedere alla Upper City, per motivi di sicurezza e per mantenere il giardinetto dei ricchi pulito e gradevole, l'accesso è riservato ai pendolari muniti di tesserino valido.</text>
@@ -145,15 +151,15 @@ Un posto economico ma ben tenuto popolato principalmente da pendolari come te, o
 			<text require="@Codeina-60 Codeina_hide">Hai nascosto il barattolo di compresse di Codeina.</text>
 			<text require="@Codeina-60 Codeina_hide2">Hai cercato di nascondere il barattolo di compresse di Codeina.</text>
 			<text require="@Polygaina Polygaina_hide">I dermi di Polygaina sono occultati nella tua scarpa destra.</text>
-			<action require="@Snaff" modify="-@Snaff -temp">Butti lo Snaff nel piccolo cestino a fianco della porta.</action>
+			<action require="@Snaff" modify="-@Snaff -temp">Butta lo Snaff nel piccolo cestino a fianco della porta.</action>
 			<action require="@Codeina-60 !Codeina_hide !Codeina_hide2" modify="-@Codeina-60 -temp">Fai cadere il barattolo di compresse nella grata di scolo</action>
-			<action require="@Codeina-60 !Codeina_hide !Codeina_hide2" modify="#stealing Codeina_hide2 -temp">Cerchi di nascondere la Codeina</action>
-			<action require="@Codeina-60 !Codeina_hide !Codeina_hide2 #stealing(2)" modify="#stealing Codeina_hide -temp">Cerchi di nascondere la Codeina</action>
-			<action require="@Polygaina !Polygaina_hide" modify="-@Polygaina Polygaina_inElevator52 -temp">Infili il foglio di dermi dietro il cartello informativo all'interno della cabina</action>
+			<action require="@Codeina-60 !Codeina_hide !Codeina_hide2" modify="#stealing Codeina_hide2 -temp">Cerca di nascondere la Codeina</action>
+			<action require="@Codeina-60 !Codeina_hide !Codeina_hide2 #stealing(2)" modify="#stealing Codeina_hide -temp">Cerca di nascondere la Codeina</action>
+			<action require="@Polygaina !Polygaina_hide" modify="-@Polygaina Polygaina_inElevator52 -temp">Infila il foglio di dermi dietro il cartello informativo all'interno della cabina</action>
 			<action require="@Polygaina !Polygaina_hide #stealing" modify="Polygaina_hide -temp">Nascondi i dermi di Polygaina nella scarpa destra</action>
 		</group>
-		<action page="UpperCity_1a" require="!temp">Esci dalla cabina e ti fai perquisire</action>
-		<action page="UpperCity_1b" require="temp">Tenti di fuggire spintonando le guardie</action>
+		<action page="UpperCity_1a" require="!temp">Esci dalla cabina e fatti perquisire</action>
+		<action page="UpperCity_1b" require="temp">Tenta di fuggire spintonando le guardie</action>
 	</page>
 	<page id="UpperCity_1a" title="Elevatore 52">
 		<text modify="=drug(0)">Le due guardie si avvicinano e cominciano la perquisizione.</text>
@@ -163,22 +169,22 @@ Un posto economico ma ben tenuto popolato principalmente da pendolari come te, o
 			<text modify="drug">Una guardia trova il barattolo di compresse di Codeina, e ti guarda con dispezzo.</text>
 			<quote>Il suo permesso è revocato per violazione dell'articolo 74 della legge sul transito.</quote>
 			<quote>Mi consegni immediatamente il suo tesserino e risalga sull'elevatore.</quote>
-			<action page="UpperCity_1c" modify="=@Codeina-60(0) =Codeina_hide(0)">Consegni la tessera magnetica</action>
-			<action page="UpperCity_1b" modify="=@Codeina-60(0) =Codeina_hide(0)">Tenti di fuggire spintonando le guardie</action>
+			<action page="UpperCity_1c" modify="=@Codeina-60(0) =Codeina_hide(0)">Consegna la tessera magnetica</action>
+			<action page="UpperCity_1b" modify="=@Codeina-60(0) =Codeina_hide(0)">Tenta di fuggire spintonando le guardie</action>
 		</group>
 		<action page="UpperCity_3" require="!drug">Continua</action>
 	</page>
 	<page id="UpperCity_1b" title="Elevatore 52">
 		<text>Esci con un balzo atterrando una guardia, mentre l'altra colta di sorpresa cerca di estrae la pistola. La donna urla e scappa in preda al panico.</text>
 		<action page="UpperCity_2a" >Aggredisci la guardia prima che possa estrarre l'arma</action>
-		<action page="UpperCity_2b" require="@Pistola" modify="-@Proiettile kill">Spari alla guardia</action>
-		<action page="UpperCity_2b" require="#parkor" modify="#parkor">Cerchi di fuggire saltando dal parapetto</action>
+		<action page="UpperCity_2b" require="@Pistola" modify="-@Proiettile kill">Spara alla guardia</action>
+		<action page="UpperCity_2b" require="#parkor" modify="#parkor">Cerca di fuggire saltando dal parapetto</action>
 	</page>
 	<page id="UpperCity_1c" title="Elevatore 52">
 		<text>Devi consegnare la tessera magnetica e tornare nella Lower City.</text>
-		<action require="$cardKabenogura !lostCard" modify="-$cardKabenogura lostCard">Consegni la tua tessera della Kabenogura</action>
-		<action require="$cardTyrellCorporation !lostCard" modify="-$cardTyrellCorporation lostCard">Consegni la tessera della Tyrell Corporation</action>
-		<action page="LowerCity_6" require="lostCard">Ritorni nella Lower City</action>
+		<action require="$cardKabenogura !lostCard" modify="-$cardKabenogura lostCard">Consegna la tua tessera della Kabenogura</action>
+		<action require="$cardTyrellCorporation !lostCard" modify="-$cardTyrellCorporation lostCard">Consegna la tessera della Tyrell Corporation</action>
+		<action page="LowerCity_6" require="lostCard">Ritorna nella Lower City</action>
 	</page>
 	<page id="UpperCity_2a" title="Upper City">
 		<text require="!UpperCity_2a_guard">La guardia ti affronta a mani nude.</text>
@@ -194,8 +200,8 @@ Un posto economico ma ben tenuto popolato principalmente da pendolari come te, o
 		<action page="UpperCity_3">Fuggi</action>
 	</page>
 	<page id="UpperCity_3" title="Upper City">
-		<!-- sei libero di proseguire -->
-		<jump page="character">Statistiche del personaggio</jump>
+		<text>...</text>
+		<!--jump page="character">Statistiche del personaggio</jump-->
 	</page>
 </book>
 
